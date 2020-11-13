@@ -58,7 +58,9 @@ class ActivityController: UITableViewController {
       updatedEvents = [Event](updatedEvents.prefix(upTo: 50))
     }
     events.accept(updatedEvents)
-    tableView.reloadData()
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
   }
 
   // MARK: - Table Data Source
