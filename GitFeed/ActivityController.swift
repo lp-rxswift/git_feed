@@ -60,6 +60,7 @@ class ActivityController: UITableViewController {
     events.accept(updatedEvents)
     DispatchQueue.main.async {
       self.tableView.reloadData()
+      self.refreshControl?.endRefreshing()
     }
   }
 
