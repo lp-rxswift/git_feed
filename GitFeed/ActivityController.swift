@@ -8,6 +8,7 @@ class ActivityController: UITableViewController {
 
   private let events = BehaviorRelay<[Event]>(value: [])
   private let bag = DisposeBag()
+  private let eventsFileURL = cachedFileURL("events.json")
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,6 +23,13 @@ class ActivityController: UITableViewController {
     refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
 
     refresh()
+  }
+
+  func cachedFileURL(_ fileName: String) -> URL {
+    return FileManager.default
+      .urls(for: .cachesDirectory, in: .allDomainsMask)
+      .first!
+      .appendingPathComponent(fileName)
   }
 
   @objc func refresh() {
